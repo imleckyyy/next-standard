@@ -4,12 +4,13 @@ import Link from "next/link";
 import clsx from "clsx";
 import { usePathname } from "next/navigation";
 import { type ReactNode } from "react";
+import { type Route } from "next";
 
-export const ActiveLink = ({
+export const ActiveLink = <T extends string>({
 	href,
 	children,
 }: {
-	href: string;
+	href: Route<T> | URL;
 	children: ReactNode;
 }) => {
 	const pathname = usePathname();
