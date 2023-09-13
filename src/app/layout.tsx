@@ -22,10 +22,10 @@ export default function RootLayout({
 					<nav className="py-8 text-center text-xs">
 						<ul className="flex justify-center space-x-4">
 							<li>
-								<ActiveLink href="/">Homepage</ActiveLink>
+								<ActiveLink href="/">Home</ActiveLink>
 							</li>
 							<li>
-								<ActiveLink href="/products">Products</ActiveLink>
+								<ActiveLink href="/products">All</ActiveLink>
 							</li>
 						</ul>
 					</nav>
