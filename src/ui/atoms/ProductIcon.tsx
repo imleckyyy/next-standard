@@ -6,7 +6,7 @@ export const ProductIcon = ({
 	alt: string;
 }) => {
 	return (
-		<div className="align-center relative mb-8 flex aspect-[4/3] justify-center">
+		<div className="align-center relative mb-8 flex aspect-[4/3] h-48 justify-center">
 			<img
 				src={src}
 				alt={alt}
