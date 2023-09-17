@@ -13,7 +13,7 @@ export const ProductListItem = ({
 	return (
 		<li>
 			<Link href={`/product/${product.id}`}>
-				<article className="flex h-full flex-col rounded-md bg-white p-4">
+				<article className="flex h-full flex-col gap-6 rounded-md bg-white">
 					<ProductIcon {...product.iconImage} />
 					<ProductListItemDescription product={product} />
 				</article>

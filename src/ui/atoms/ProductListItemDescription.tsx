@@ -9,7 +9,7 @@ export const ProductListItemDescription = ({
 	product: { name, price, category },
 }: ProductListItemDescriptionProps) => {
 	return (
-		<div className="mt-4">
+		<div>
 			<div className="flex flex-row justify-between">
 				<h3 className="pr-4 text-sm text-gray-700 hover:text-gray-500">
 					{name}

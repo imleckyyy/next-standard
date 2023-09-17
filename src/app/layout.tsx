@@ -2,6 +2,8 @@ import "./globals.css";
 import type { Metadata } from "next";
 import { Inter } from "next/font/google";
 import { ActiveLink } from "@/ui/atoms/ActiveLink";
+import { Topbar } from "@/ui/organisms/Topbar";
+import { Header } from "@/ui/organisms/Header";
 
 const inter = Inter({ subsets: ["latin"] });
 
@@ -18,19 +20,9 @@ export default function RootLayout({
 	return (
 		<html lang="en">
 			<body className={inter.className}>
-				<header>
-					<nav className="py-8 text-center text-xs">
-						<ul className="flex justify-center space-x-4">
-							<li>
-								<ActiveLink href="/">Home</ActiveLink>
-							</li>
-							<li>
-								<ActiveLink href="/products">All</ActiveLink>
-							</li>
-						</ul>
-					</nav>
-				</header>
-				<section className="sm:py-18 mx-auto flex w-full max-w-2xl flex-grow flex-col px-8 py-12 sm:px-6 lg:max-w-7xl">
+				<Topbar />
+				<Header />
+				<section className="sm:py-18 mx-auto flex w-full max-w-2xl flex-grow flex-col px-4 py-12 lg:max-w-7xl">
 					{children}
 				</section>
 				<footer className="py-8 text-center text-xs">

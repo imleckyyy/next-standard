@@ -6,13 +6,13 @@ export const ProductIcon = ({
 	alt: string;
 }) => {
 	return (
-		<div className="align-center relative mb-8 flex aspect-[4/3] h-48 justify-center">
+		<div className="align-center relative flex aspect-[4/3] h-80 justify-center rounded-md bg-gray-100 p-6">
 			<img
 				src={src}
 				alt={alt}
 				width={256}
 				height={256}
-				className="max-h-full object-contain"
+				className="max-h-full object-contain mix-blend-multiply"
 			/>
 		</div>
 	);

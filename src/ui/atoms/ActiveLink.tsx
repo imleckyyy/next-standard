@@ -9,20 +9,26 @@ import { type Route } from "next";
 export const ActiveLink = <T extends string>({
 	href,
 	children,
+	className,
+	activeClassName,
+	exact,
 }: {
 	href: Route<T> | URL;
 	children: ReactNode;
+	className?: string;
+	activeClassName?: string;
+	exact?: boolean;
 }) => {
 	const pathname = usePathname();
-	const isActive = pathname === href;
+
+	const isActive = exact
+		? pathname === href
+		: pathname.startsWith(href.toString());
 
 	return (
 		<Link
 			href={href}
-			className={clsx(
-				`text-blue-400 hover:text-blue-600`,
-				isActive && `underline`,
-			)}
+			className={clsx(className, isActive && activeClassName)}
 		>
 			{children}
 		</Link>
