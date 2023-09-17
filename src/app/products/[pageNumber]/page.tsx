@@ -5,6 +5,12 @@ import { ProductList } from "@/ui/organisms/ProductList";
 const PRODUCTS_PER_PAGE = 20;
 const TOTAL_PAGES = 15;
 
+export async function generateStaticParams() {
+	return Array.from({ length: TOTAL_PAGES }, (_, i) => ({
+		pageNumber: String(i + 1),
+	}));
+}
+
 export default async function ProductsPage({
 	params,
 }: {

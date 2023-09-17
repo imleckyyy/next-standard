@@ -1,7 +1,6 @@
 import "./globals.css";
 import type { Metadata } from "next";
 import { Inter } from "next/font/google";
-import { ActiveLink } from "@/ui/atoms/ActiveLink";
 import { Topbar } from "@/ui/organisms/Topbar";
 import { Header } from "@/ui/organisms/Header";
 

@@ -13,7 +13,7 @@ export const ActiveLink = <T extends string>({
 	activeClassName,
 	exact,
 }: {
-	href: Route<T> | URL;
+	href: Route<T>;
 	children: ReactNode;
 	className?: string;
 	activeClassName?: string;
