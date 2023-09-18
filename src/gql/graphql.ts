@@ -10735,6 +10735,13 @@ export type ProductsGetByCollectionSlugQueryVariables = Exact<{
 
 export type ProductsGetByCollectionSlugQuery = { collections: Array<{ name: string, slug: string, description?: string | null, products: Array<{ id: string, name: string, price: number, categories: Array<{ name: string }>, images: Array<{ url: string }> }> }> };
 
+export type ProductsGetBySearchQueryQueryVariables = Exact<{
+  searchQuery: Scalars['String']['input'];
+}>;
+
+
+export type ProductsGetBySearchQueryQuery = { products: Array<{ id: string, name: string, price: number, categories: Array<{ name: string }>, images: Array<{ url: string }> }> };
+
 export type ProductsGetListQueryVariables = Exact<{
   productsPerPage: Scalars['Int']['input'];
   productsOffset: Scalars['Int']['input'];
@@ -10868,6 +10875,23 @@ fragment ProductListItem on Product {
   }
   price
 }`) as unknown as TypedDocumentString<ProductsGetByCollectionSlugQuery, ProductsGetByCollectionSlugQueryVariables>;
+export const ProductsGetBySearchQueryDocument = new TypedDocumentString(`
+    query ProductsGetBySearchQuery($searchQuery: String!) {
+  products(where: {_search: $searchQuery}) {
+    ...ProductListItem
+  }
+}
+    fragment ProductListItem on Product {
+  id
+  name
+  categories(first: 1) {
+    name
+  }
+  images(first: 1) {
+    url
+  }
+  price
+}`) as unknown as TypedDocumentString<ProductsGetBySearchQueryQuery, ProductsGetBySearchQueryQueryVariables>;
 export const ProductsGetListDocument = new TypedDocumentString(`
     query ProductsGetList($productsPerPage: Int!, $productsOffset: Int!) {
   products(first: $productsPerPage, skip: $productsOffset) {

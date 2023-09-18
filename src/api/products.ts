@@ -5,6 +5,7 @@ import {
 	ProductsGetListDocument,
 	ProductGetByIdDocument,
 	ProductsGetByCollectionSlugDocument,
+	ProductsGetBySearchQueryDocument,
 } from "@/gql/graphql";
 
 export const getProductsList = async ({
@@ -67,6 +68,23 @@ export const getProductsByCollectionSlug = async ({
 	);
 
 	const products = graphqlResponse.collections[0]?.products;
+
+	return products;
+};
+
+export const getProductsBySearchQuery = async ({
+	searchQuery,
+}: {
+	searchQuery: string;
+}) => {
+	const graphqlResponse = await executeGraphql(
+		ProductsGetBySearchQueryDocument,
+		{
+			searchQuery: searchQuery,
+		},
+	);
+
+	const products = graphqlResponse.products;
 
 	return products;
 };
