@@ -27,7 +27,7 @@ export const SearchBar = () => {
 	}, [router, debouncedInputValue]);
 
 	return (
-		<div className="g-2 relative flex w-full items-center rounded-md border border-gray-100 p-1 md:w-auto">
+		<div className="g-2 relative order-5 flex w-full items-center rounded-md border border-gray-100 p-1 md:order-3 md:w-auto">
 			<input
 				type="text"
 				placeholder="Search"

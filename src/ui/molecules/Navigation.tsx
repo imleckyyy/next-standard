@@ -3,7 +3,7 @@ import { ActiveLink } from "../atoms/ActiveLink";
 
 export const Navigation = () => {
 	return (
-		<nav className="text-center text-xs md:flex-1">
+		<nav className="order-4 text-center text-xs md:order-2 md:flex-1">
 			<button type="button" className="p-2 md:hidden">
 				<Bars3Icon className="h-6 w-6" />
 			</button>
