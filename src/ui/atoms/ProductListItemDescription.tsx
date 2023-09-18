@@ -1,12 +1,12 @@
-import { type ProductItemType } from "../types";
+import { type ProductListItemFragment } from "@/gql/graphql";
 import { formatPrice } from "@/utils";
 
 type ProductListItemDescriptionProps = {
-	product: ProductItemType;
+	product: ProductListItemFragment;
 };
 
 export const ProductListItemDescription = ({
-	product: { name, price, category },
+	product: { name, price, categories },
 }: ProductListItemDescriptionProps) => {
 	return (
 		<div>
@@ -21,9 +21,13 @@ export const ProductListItemDescription = ({
 					{formatPrice(price)}
 				</p>
 			</div>
-			<div className="mt-1">
-				<p className="text-xs text-gray-500">{category}</p>
-			</div>
+			{categories[0] && (
+				<div className="mt-1">
+					<p className="text-xs text-gray-500">
+						{categories[0].name}
+					</p>
+				</div>
+			)}
 		</div>
 	);
 };

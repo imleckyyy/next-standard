@@ -1,9 +1,11 @@
-import { getProductsList } from "@/api/products";
+import { notFound } from "next/navigation";
 import { Pagination } from "@/ui/organisms/Pagination";
 import { ProductList } from "@/ui/organisms/ProductList";
+import { getProductsList } from "@/api/products";
+import { CategoryHeadline } from "@/ui/atoms/CategoryHeadline";
 
-const PRODUCTS_PER_PAGE = 20;
-const TOTAL_PAGES = 15;
+const PRODUCTS_PER_PAGE = 3;
+const TOTAL_PAGES = 2;
 
 export async function generateStaticParams() {
 	return Array.from({ length: TOTAL_PAGES }, (_, i) => ({
@@ -19,17 +21,24 @@ export default async function ProductsPage({
 	const currentPage = Number(params.pageNumber);
 	const products = await getProductsList({
 		productsPerPage: PRODUCTS_PER_PAGE,
-		productsOffset: PRODUCTS_PER_PAGE * (currentPage - 1),
+		productsOffset: (currentPage - 1) * PRODUCTS_PER_PAGE,
 	});
+
+	if (!products) {
+		return notFound();
+	}
 
 	return (
 		<>
-			<h1>Page: {params.pageNumber}</h1>
+			<CategoryHeadline
+				name={"Wszystkie produkty"}
+				page={currentPage}
+			/>
 			<ProductList products={products} />
 			<Pagination
 				currentPage={currentPage}
 				totalPages={TOTAL_PAGES}
-				baseUrl="/products"
+				baseUrl={`/products`}
 			/>
 		</>
 	);

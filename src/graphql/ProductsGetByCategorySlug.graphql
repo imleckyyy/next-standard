@@ -1,0 +1,11 @@
+query ProductsGetByCategorySlug(
+	$slug: String!
+	$productsPerPage: Int!
+	$productsOffset: Int!
+) {
+	categories(where: { slug: $slug }) {
+		products(first: $productsPerPage, skip: $productsOffset) {
+			...ProductListItem
+		}
+	}
+}

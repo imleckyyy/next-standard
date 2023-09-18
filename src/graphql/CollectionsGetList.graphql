@@ -1,0 +1,5 @@
+query CollectionsGetList($first: Int!) {
+	collections(first: $first) {
+		...CollectionDetails
+	}
+}

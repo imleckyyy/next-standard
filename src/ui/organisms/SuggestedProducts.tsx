@@ -6,8 +6,8 @@ const sleep = (ms: number) =>
 
 export const SuggestedProducts = async () => {
 	const products = await getProductsList({
-		productsPerPage: 10,
-		productsOffset: 10,
+		productsPerPage: 4,
+		productsOffset: 0,
 	});
 	await sleep(2000);
 	return (

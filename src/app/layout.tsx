@@ -3,8 +3,9 @@ import type { Metadata } from "next";
 import { Inter } from "next/font/google";
 import { Topbar } from "@/ui/organisms/Topbar";
 import { Header } from "@/ui/organisms/Header";
+import { Footer } from "@/ui/organisms/Footer";
 
-const inter = Inter({ subsets: ["latin"] });
+const inter = Inter({ subsets: ["latin", "latin-ext"] });
 
 export const metadata: Metadata = {
 	title: "Create Next App",
@@ -24,9 +25,7 @@ export default function RootLayout({
 				<section className="sm:py-18 mx-auto flex w-full max-w-2xl flex-grow flex-col px-4 py-12 lg:max-w-7xl">
 					{children}
 				</section>
-				<footer className="py-8 text-center text-xs">
-					<p>@ 2023</p>
-				</footer>
+				<Footer />
 			</body>
 		</html>
 	);

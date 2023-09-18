@@ -1,3 +1,5 @@
+import NextImage from "next/image";
+
 export const ProductIcon = ({
 	src,
 	alt,
@@ -7,7 +9,7 @@ export const ProductIcon = ({
 }) => {
 	return (
 		<div className="align-center relative flex aspect-[4/3] h-80 justify-center rounded-md bg-gray-100 p-6">
-			<img
+			<NextImage
 				src={src}
 				alt={alt}
 				width={256}

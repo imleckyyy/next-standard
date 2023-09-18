@@ -10,7 +10,7 @@ export default function ProductsPageLayout({
 			<aside className="col-start-1 col-end-4 hidden sm:flex">
 				Filters
 			</aside>
-			<div className="col-start-4 col-end-13 mx-auto max-w-5xl">
+			<div className="col-start-4 col-end-13 mx-auto w-full max-w-5xl">
 				{children}
 			</div>
 		</div>

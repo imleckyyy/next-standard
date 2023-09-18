@@ -1,0 +1,12 @@
+query ProductsGetByCollectionSlug(
+	$slug: String!
+	$productsPerPage: Int!
+	$productsOffset: Int!
+) {
+	collections(where: { slug: $slug }) {
+		...CollectionDetails
+		products(first: $productsPerPage, skip: $productsOffset) {
+			...ProductListItem
+		}
+	}
+}

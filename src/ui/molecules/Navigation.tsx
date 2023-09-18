@@ -29,12 +29,20 @@ export const Navigation = () => {
 				</li>
 				<li>
 					<ActiveLink
-						href="/regulamin"
+						href="/categories/t-shirts/1"
 						className="text-sm text-gray-700 hover:text-gray-900"
 						activeClassName="underline"
-						exact
 					>
-						Regulamin
+						T-Shirts
+					</ActiveLink>
+				</li>
+				<li>
+					<ActiveLink
+						href="/categories/accessories/1"
+						className="text-sm text-gray-700 hover:text-gray-900"
+						activeClassName="underline"
+					>
+						Accessories
 					</ActiveLink>
 				</li>
 			</ul>
