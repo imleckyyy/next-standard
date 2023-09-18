@@ -30,11 +30,11 @@ export default async function ProductsPage({
 
 	return (
 		<>
-			<CategoryHeadline
-				name={"Wszystkie produkty"}
-				page={currentPage}
+			<CategoryHeadline name={"Products"} page={currentPage} />
+			<ProductList
+				products={products}
+				wrapperClass="mb-8 mt-4 grid grid-cols-1 gap-x-6 gap-y-10 sm:grid-cols-2 lg:grid-cols-3"
 			/>
-			<ProductList products={products} />
 			<Pagination
 				currentPage={currentPage}
 				totalPages={TOTAL_PAGES}

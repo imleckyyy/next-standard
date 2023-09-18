@@ -85,7 +85,7 @@ export default async function ProductPage({
 			</div>
 			<div className="mb-12 py-6">{product.description}</div>
 			<Suspense fallback={<Placeholder />}>
-				<SuggestedProducts />
+				<SuggestedProducts headline="You may also like..." />
 			</Suspense>
 		</>
 	);

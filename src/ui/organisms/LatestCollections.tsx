@@ -92,7 +92,7 @@ export const LatestCollections = async () => {
 									<Link
 										key={collection.slug}
 										href={`/collections/${collection.slug}`}
-										className="mr-4 inline-block rounded-md border border-transparent bg-indigo-600 px-8 py-3 text-center font-medium text-white hover:bg-indigo-700"
+										className="mr-4 inline-block rounded-md border border-transparent bg-gray-800 px-8 py-3 text-center font-medium text-white hover:bg-gray-900"
 									>
 										{collection.name}
 									</Link>

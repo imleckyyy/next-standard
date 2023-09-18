@@ -4,7 +4,13 @@ import { getProductsList } from "@/api/products";
 const sleep = (ms: number) =>
 	new Promise((resolve) => setTimeout(resolve, ms));
 
-export const SuggestedProducts = async () => {
+export const SuggestedProducts = async ({
+	headline,
+	wrapperClass,
+}: {
+	headline: string;
+	wrapperClass?: string;
+}) => {
 	const products = await getProductsList({
 		productsPerPage: 4,
 		productsOffset: 0,
@@ -12,8 +18,11 @@ export const SuggestedProducts = async () => {
 	await sleep(2000);
 	return (
 		<>
-			<h2 className="text-lg">Inni kupili również</h2>
-			<ProductList products={products.slice(-4)} />
+			<h2 className="text-lg">{headline || "Suggested products"}</h2>
+			<ProductList
+				products={products.slice(-4)}
+				wrapperClass={wrapperClass}
+			/>
 		</>
 	);
 };

@@ -3,11 +3,11 @@ import { ActiveLink } from "../atoms/ActiveLink";
 
 export const Navigation = () => {
 	return (
-		<nav className="text-center text-xs">
-			<button type="button" className="p-2 sm:hidden">
+		<nav className="text-center text-xs md:flex-1">
+			<button type="button" className="p-2 md:hidden">
 				<Bars3Icon className="h-6 w-6" />
 			</button>
-			<ul className="hidden justify-center space-x-4 sm:flex">
+			<ul className="hidden space-x-4 md:flex">
 				<li>
 					<ActiveLink
 						href="/"

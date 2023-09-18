@@ -7,9 +7,9 @@ import { useEffect, useState } from "react";
 export const SearchBar = () => {
 	const router = useRouter();
 	const searchParams = useSearchParams();
-	const searchQuery = searchParams.get("query");
+	const searchQuery = searchParams.get("query") || "";
 
-	const [inputValue, setInputValue] = useState(searchQuery || "");
+	const [inputValue, setInputValue] = useState(searchQuery);
 	const [debouncedInputValue, setDebouncedInputValue] =
 		useState(inputValue);
 
@@ -27,7 +27,7 @@ export const SearchBar = () => {
 	}, [router, debouncedInputValue]);
 
 	return (
-		<div className="g-2 relative flex items-center rounded-md border p-1">
+		<div className="g-2 relative flex w-full items-center rounded-md border border-gray-100 p-1 md:w-auto">
 			<input
 				type="text"
 				placeholder="Search"

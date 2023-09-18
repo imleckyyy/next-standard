@@ -26,8 +26,8 @@ export const Topbar = () => {
 				/>
 			</div>
 			<div className="flex flex-wrap items-center gap-x-4 gap-y-2">
-				<p className="text-center text-sm leading-6 text-gray-900">
-					Z nami to możliwe! Realizacja zamówienia do 24h.
+				<p className="text-center text-xs leading-6 text-gray-900 sm:text-sm">
+					Free shipping to 30+ countries
 				</p>
 			</div>
 		</div>
