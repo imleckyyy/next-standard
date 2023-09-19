@@ -20,11 +20,6 @@ const nextConfig = {
 				destination: "/categories/:path/1",
 				permanent: true,
 			},
-			{
-				source: "/collections/:path",
-				destination: "/collections/:path/1",
-				permanent: true,
-			},
 		];
 	},
 };

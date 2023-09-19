@@ -10726,10 +10726,15 @@ export type ProductsGetByCategorySlugQueryVariables = Exact<{
 
 export type ProductsGetByCategorySlugQuery = { categories: Array<{ products: Array<{ id: string, name: string, price: number, categories: Array<{ name: string }>, images: Array<{ url: string }> }> }> };
 
+export type ProductsGetByCategorySlugCountQueryVariables = Exact<{
+  slug: Scalars['String']['input'];
+}>;
+
+
+export type ProductsGetByCategorySlugCountQuery = { productsConnection: { aggregate: { count: number } } };
+
 export type ProductsGetByCollectionSlugQueryVariables = Exact<{
   slug: Scalars['String']['input'];
-  productsPerPage: Scalars['Int']['input'];
-  productsOffset: Scalars['Int']['input'];
 }>;
 
 
@@ -10749,6 +10754,11 @@ export type ProductsGetListQueryVariables = Exact<{
 
 
 export type ProductsGetListQuery = { products: Array<{ id: string, name: string, price: number, categories: Array<{ name: string }>, images: Array<{ url: string }> }> };
+
+export type ProductsGetListCountQueryVariables = Exact<{ [key: string]: never; }>;
+
+
+export type ProductsGetListCountQuery = { productsConnection: { aggregate: { count: number } } };
 
 export class TypedDocumentString<TResult, TVariables>
   extends String
@@ -10850,11 +10860,20 @@ export const ProductsGetByCategorySlugDocument = new TypedDocumentString(`
   }
   price
 }`) as unknown as TypedDocumentString<ProductsGetByCategorySlugQuery, ProductsGetByCategorySlugQueryVariables>;
+export const ProductsGetByCategorySlugCountDocument = new TypedDocumentString(`
+    query ProductsGetByCategorySlugCount($slug: String!) {
+  productsConnection(where: {categories_every: {slug: $slug}}) {
+    aggregate {
+      count
+    }
+  }
+}
+    `) as unknown as TypedDocumentString<ProductsGetByCategorySlugCountQuery, ProductsGetByCategorySlugCountQueryVariables>;
 export const ProductsGetByCollectionSlugDocument = new TypedDocumentString(`
-    query ProductsGetByCollectionSlug($slug: String!, $productsPerPage: Int!, $productsOffset: Int!) {
+    query ProductsGetByCollectionSlug($slug: String!) {
   collections(where: {slug: $slug}) {
     ...CollectionDetails
-    products(first: $productsPerPage, skip: $productsOffset) {
+    products(first: 20) {
       ...ProductListItem
     }
   }
@@ -10909,3 +10928,12 @@ export const ProductsGetListDocument = new TypedDocumentString(`
   }
   price
 }`) as unknown as TypedDocumentString<ProductsGetListQuery, ProductsGetListQueryVariables>;
+export const ProductsGetListCountDocument = new TypedDocumentString(`
+    query ProductsGetListCount {
+  productsConnection {
+    aggregate {
+      count
+    }
+  }
+}
+    `) as unknown as TypedDocumentString<ProductsGetListCountQuery, ProductsGetListCountQueryVariables>;

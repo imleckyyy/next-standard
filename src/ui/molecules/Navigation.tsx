@@ -1,5 +1,34 @@
 import { Bars3Icon } from "@heroicons/react/24/solid";
+import { type Route } from "next";
 import { ActiveLink } from "../atoms/ActiveLink";
+
+const navigationItems = [
+	{
+		name: "Home",
+		href: "/",
+		exact: true,
+	},
+	{
+		name: "All",
+		href: "/products",
+		exact: false,
+	},
+	{
+		name: "T-Shirts",
+		href: "/categories/t-shirts",
+		exact: false,
+	},
+	{
+		name: "Hoodies",
+		href: "/categories/hoodies",
+		exact: false,
+	},
+	{
+		name: "Accessories",
+		href: "/categories/accessories",
+		exact: false,
+	},
+];
 
 export const Navigation = () => {
 	return (
@@ -8,43 +37,20 @@ export const Navigation = () => {
 				<Bars3Icon className="h-6 w-6" />
 			</button>
 			<ul className="hidden space-x-4 md:flex">
-				<li>
-					<ActiveLink
-						href="/"
-						className="text-sm text-gray-700 hover:text-gray-900"
-						activeClassName="underline"
-						exact
-					>
-						Home
-					</ActiveLink>
-				</li>
-				<li>
-					<ActiveLink
-						href="/products"
-						className="text-sm text-gray-700 hover:text-gray-900"
-						activeClassName="underline"
-					>
-						All
-					</ActiveLink>
-				</li>
-				<li>
-					<ActiveLink
-						href="/categories/t-shirts/1"
-						className="text-sm text-gray-700 hover:text-gray-900"
-						activeClassName="underline"
-					>
-						T-Shirts
-					</ActiveLink>
-				</li>
-				<li>
-					<ActiveLink
-						href="/categories/accessories/1"
-						className="text-sm text-gray-700 hover:text-gray-900"
-						activeClassName="underline"
-					>
-						Accessories
-					</ActiveLink>
-				</li>
+				{navigationItems.map((item) => {
+					return (
+						<li key={item.name}>
+							<ActiveLink
+								href={item.href as Route}
+								className="text-sm text-gray-700 hover:text-gray-900"
+								activeClassName="underline"
+								exact={item.exact}
+							>
+								{item.name}
+							</ActiveLink>
+						</li>
+					);
+				})}
 			</ul>
 		</nav>
 	);

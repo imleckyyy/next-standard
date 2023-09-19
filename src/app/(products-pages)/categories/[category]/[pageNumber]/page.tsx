@@ -1,17 +1,13 @@
 import { notFound } from "next/navigation";
 import { Pagination } from "@/ui/organisms/Pagination";
 import { ProductList } from "@/ui/organisms/ProductList";
-import { getProductsByCategorySlug } from "@/api/products";
+import {
+	getProductsByCategorySlug,
+	getProductsCountByCategorySlug,
+} from "@/api/products";
 import { CategoryHeadline } from "@/ui/atoms/CategoryHeadline";
 
 const PRODUCTS_PER_PAGE = 3;
-const TOTAL_PAGES = 2;
-
-export async function generateStaticParams() {
-	return Array.from({ length: TOTAL_PAGES }, (_, i) => ({
-		pageNumber: String(i + 1),
-	}));
-}
 
 export default async function CategoryProductsPage({
 	params,
@@ -19,6 +15,12 @@ export default async function CategoryProductsPage({
 	params: { category: string; pageNumber: string };
 }) {
 	const currentPage = Number(params.pageNumber);
+
+	const productsCount = await getProductsCountByCategorySlug(
+		params.category,
+	);
+	const totalPages = Math.ceil(productsCount / PRODUCTS_PER_PAGE);
+
 	const products = await getProductsByCategorySlug({
 		categorySlug: params.category,
 		productsPerPage: PRODUCTS_PER_PAGE,
@@ -41,7 +43,7 @@ export default async function CategoryProductsPage({
 			/>
 			<Pagination
 				currentPage={currentPage}
-				totalPages={TOTAL_PAGES}
+				totalPages={totalPages}
 				baseUrl={`/categories${
 					params.category && `/${params.category}`
 				}`}
