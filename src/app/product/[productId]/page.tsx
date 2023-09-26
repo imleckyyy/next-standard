@@ -2,10 +2,13 @@ import { Suspense } from "react";
 import { type Metadata } from "next";
 import { notFound } from "next/navigation";
 import NextImage from "next/image";
+import { revalidateTag } from "next/cache";
+import { AddToCartButton } from "./AddToCartButton";
 import { getProductById } from "@/api/products";
 import { SuggestedProducts } from "@/ui/organisms/SuggestedProducts";
 import { formatPrice } from "@/utils";
 import { Placeholder } from "@/ui/atoms/Placeholder";
+import { addProductToCart, getOrCreateCart } from "@/api/cart";
 
 export const generateMetadata = async ({
 	params,
@@ -45,6 +48,14 @@ export default async function ProductPage({
 		notFound();
 	}
 
+	async function addToCartAction() {
+		"use server";
+		const cart = await getOrCreateCart();
+		await addProductToCart(cart.id, params.productId);
+
+		revalidateTag("cart");
+	}
+
 	return (
 		<>
 			<div className="grid w-full grid-cols-12 gap-8">
@@ -71,15 +82,17 @@ export default async function ProductPage({
 						</div>
 					)}
 					<div className="pt-6 text-xl">
-						Cena: {formatPrice(product.price)}
+						Price: {formatPrice(product.price)}
 					</div>
 					<div className="pt-6">
-						<button
-							type="button"
-							className="rounded bg-gray-800 px-4 py-2 font-bold text-white hover:bg-gray-900"
-						>
-							Dodaj do koszyka
-						</button>
+						<form action={addToCartAction}>
+							<input
+								type="hidden"
+								name="productId"
+								value={product.id}
+							/>
+							<AddToCartButton />
+						</form>
 					</div>
 				</div>
 			</div>

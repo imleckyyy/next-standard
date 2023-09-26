@@ -6,12 +6,12 @@ export const getCollectionsList = async ({
 }: {
 	first: number;
 }) => {
-	const graphqlResponse = await executeGraphql(
-		CollectionsGetListDocument,
-		{
+	const graphqlResponse = await executeGraphql({
+		query: CollectionsGetListDocument,
+		variables: {
 			first: first,
 		},
-	);
+	});
 
 	return graphqlResponse.collections;
 };
