@@ -1,6 +1,7 @@
 import { redirect } from "next/navigation";
 import { IncrementProductQuantity } from "./IncrementProductQuantity";
 import { RemoveButton } from "./RemoveButton";
+import { handlePaymentAction } from "./actions";
 import { getCartFromCookies } from "@/api/cart";
 import { formatPrice } from "@/utils";
 
@@ -42,6 +43,14 @@ export default async function CartPage() {
 					)}
 				</tbody>
 			</table>
+			<form action={handlePaymentAction}>
+				<button
+					type="submit"
+					className="mt-4 w-full max-w-xs rounded-md border bg-slate-950 p-2 text-white shadow-sm transition-colors hover:bg-slate-700"
+				>
+					Pay
+				</button>
+			</form>
 		</div>
 	);
 }
