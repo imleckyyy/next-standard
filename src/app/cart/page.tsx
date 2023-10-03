@@ -1,5 +1,6 @@
 import { redirect } from "next/navigation";
 import { IncrementProductQuantity } from "./IncrementProductQuantity";
+import { RemoveButton } from "./RemoveButton";
 import { getCartFromCookies } from "@/api/cart";
 import { formatPrice } from "@/utils";
 
@@ -17,6 +18,7 @@ export default async function CartPage() {
 						<th>Product</th>
 						<th className="px-4">Quantity</th>
 						<th>Price</th>
+						<th></th>
 					</tr>
 				</thead>
 				<tbody>
@@ -32,6 +34,9 @@ export default async function CartPage() {
 										/>
 									</td>
 									<td>{formatPrice(item.product.price)}</td>
+									<td>
+										<RemoveButton itemId={item.id} />
+									</td>
 								</tr>
 							),
 					)}

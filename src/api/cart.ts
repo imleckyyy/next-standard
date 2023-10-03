@@ -29,6 +29,7 @@ export async function getCartFromCookies() {
 		const { order: cart } = await executeGraphql({
 			query: CartGetByIdDocument,
 			variables: { id: cartId },
+			cache: "no-store",
 			next: {
 				tags: ["cart"],
 			},
@@ -45,6 +46,7 @@ async function createCart() {
 	return executeGraphql({
 		query: CartCreateDocument,
 		variables: {},
+		cache: "no-store",
 	});
 }
 
@@ -57,6 +59,7 @@ export async function addProductToCart(
 		variables: {
 			productId: productId,
 		},
+		cache: "no-store",
 	});
 
 	if (!product) {
@@ -70,5 +73,6 @@ export async function addProductToCart(
 			productId,
 			total: product.price,
 		},
+		cache: "no-store",
 	});
 }
