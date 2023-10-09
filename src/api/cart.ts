@@ -6,6 +6,7 @@ import {
 	CartAddProductDocument,
 	CartCreateDocument,
 	ProductGetByIdDocument,
+	CartSetProductQuantityDocument,
 } from "@/gql/graphql";
 
 export async function getOrCreateCart(): Promise<CartFragment> {
@@ -64,6 +65,27 @@ export async function addProductToCart(
 
 	if (!product) {
 		throw new Error("Product not found");
+	}
+
+	const cart = await getCartFromCookies();
+
+	if (cart) {
+		const productInCart = cart.orderItems.find(
+			(item) => item.product?.id === productId,
+		);
+		if (productInCart) {
+			const { id, quantity } = productInCart;
+
+			await executeGraphql({
+				query: CartSetProductQuantityDocument,
+				variables: {
+					itemId: id,
+					quantity: quantity + 1,
+				},
+			});
+
+			return false;
+		}
 	}
 
 	await executeGraphql({
