@@ -9,6 +9,8 @@ import { SuggestedProducts } from "@/ui/organisms/SuggestedProducts";
 import { formatPrice } from "@/utils";
 import { Placeholder } from "@/ui/atoms/Placeholder";
 import { addProductToCart, getOrCreateCart } from "@/api/cart";
+import { ProductReviews } from "@/ui/organisms/ProductReviews";
+import { getReviewsByProductId } from "@/api/reviews";
 
 export const generateMetadata = async ({
 	params,
@@ -41,6 +43,8 @@ export default async function ProductPage({
 	if (!product) {
 		notFound();
 	}
+
+	const reviews = await getReviewsByProductId(params.productId);
 
 	async function addToCartAction() {
 		"use server";
@@ -94,6 +98,10 @@ export default async function ProductPage({
 			<Suspense fallback={<Placeholder />}>
 				<SuggestedProducts headline="You may also like..." />
 			</Suspense>
+			<ProductReviews
+				productId={params.productId}
+				reviews={reviews}
+			/>
 		</>
 	);
 }

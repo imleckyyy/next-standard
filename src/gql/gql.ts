@@ -31,6 +31,9 @@ const documents = {
     "query ProductsGetBySearchQuery($searchQuery: String!) {\n  products(where: {_search: $searchQuery}) {\n    ...ProductListItem\n  }\n}": types.ProductsGetBySearchQueryDocument,
     "query ProductsGetList($productsPerPage: Int!, $productsOffset: Int!) {\n  products(first: $productsPerPage, skip: $productsOffset) {\n    ...ProductListItem\n  }\n}": types.ProductsGetListDocument,
     "query ProductsGetListCount {\n  productsConnection {\n    aggregate {\n      count\n    }\n  }\n}": types.ProductsGetListCountDocument,
+    "fragment ReviewItem on Review {\n  id\n  name\n  rating\n  stage\n  headline\n  email\n  content\n}": types.ReviewItemFragmentDoc,
+    "mutation ReviewsAddReview($headline: String!, $content: String!, $rating: Int!, $name: String!, $email: String!, $productId: ID!) {\n  createReview(\n    data: {headline: $headline, content: $content, rating: $rating, name: $name, email: $email, product: {connect: {id: $productId}}}\n  ) {\n    ...ReviewItem\n  }\n}": types.ReviewsAddReviewDocument,
+    "query getReviewsByProductId($productId: ID!) {\n  reviews(where: {product: {id: $productId}}) {\n    ...ReviewItem\n  }\n}": types.GetReviewsByProductIdDocument,
 };
 
 /**
@@ -101,6 +104,18 @@ export function graphql(source: "query ProductsGetList($productsPerPage: Int!, $
  * The graphql function is used to parse GraphQL queries into a document that can be used by GraphQL clients.
  */
 export function graphql(source: "query ProductsGetListCount {\n  productsConnection {\n    aggregate {\n      count\n    }\n  }\n}"): typeof import('./graphql').ProductsGetListCountDocument;
+/**
+ * The graphql function is used to parse GraphQL queries into a document that can be used by GraphQL clients.
+ */
+export function graphql(source: "fragment ReviewItem on Review {\n  id\n  name\n  rating\n  stage\n  headline\n  email\n  content\n}"): typeof import('./graphql').ReviewItemFragmentDoc;
+/**
+ * The graphql function is used to parse GraphQL queries into a document that can be used by GraphQL clients.
+ */
+export function graphql(source: "mutation ReviewsAddReview($headline: String!, $content: String!, $rating: Int!, $name: String!, $email: String!, $productId: ID!) {\n  createReview(\n    data: {headline: $headline, content: $content, rating: $rating, name: $name, email: $email, product: {connect: {id: $productId}}}\n  ) {\n    ...ReviewItem\n  }\n}"): typeof import('./graphql').ReviewsAddReviewDocument;
+/**
+ * The graphql function is used to parse GraphQL queries into a document that can be used by GraphQL clients.
+ */
+export function graphql(source: "query getReviewsByProductId($productId: ID!) {\n  reviews(where: {product: {id: $productId}}) {\n    ...ReviewItem\n  }\n}"): typeof import('./graphql').GetReviewsByProductIdDocument;
 
 
 export function graphql(source: string) {
