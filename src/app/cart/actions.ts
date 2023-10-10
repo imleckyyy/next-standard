@@ -29,6 +29,7 @@ export const changeItemQuantity = (
 			itemId,
 			quantity,
 		},
+		cache: "no-store",
 	});
 };
 
