@@ -8,7 +8,7 @@ export const HeaderCart = async () => {
 
 	return (
 		<div className="order-3 md:order-5">
-			<Link href="/cart/sidebar" className="flex items-center">
+			<Link href="/cart" className="flex items-center">
 				<ShoppingBagIcon className="mr-1 h-6 w-6" />
 				<span className="text-sm">{quantity}</span>
 			</Link>
