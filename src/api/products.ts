@@ -8,20 +8,24 @@ import {
 	ProductsGetBySearchQueryDocument,
 	ProductsGetListCountDocument,
 	ProductsGetByCategorySlugCountDocument,
+	type ProductOrderByInput,
 } from "@/gql/graphql";
 
 export const getProductsList = async ({
 	productsPerPage,
 	productsOffset,
+	orderBy,
 }: {
 	productsPerPage: number;
 	productsOffset: number;
+	orderBy?: ProductOrderByInput;
 }) => {
 	const graphqlResponse = await executeGraphql({
 		query: ProductsGetListDocument,
 		variables: {
 			productsPerPage: productsPerPage,
 			productsOffset: productsOffset,
+			...(orderBy && { orderBy: orderBy }),
 		},
 		next: {
 			revalidate: 60 * 60 * 24 * 30,

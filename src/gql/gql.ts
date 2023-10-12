@@ -31,7 +31,7 @@ const documents = {
     "query ProductsGetByCategorySlugCount($slug: String!) {\n  productsConnection(where: {categories_every: {slug: $slug}}) {\n    aggregate {\n      count\n    }\n  }\n}": types.ProductsGetByCategorySlugCountDocument,
     "query ProductsGetByCollectionSlug($slug: String!) {\n  collections(where: {slug: $slug}) {\n    ...CollectionDetails\n    products(first: 20) {\n      ...ProductListItem\n    }\n  }\n}": types.ProductsGetByCollectionSlugDocument,
     "query ProductsGetBySearchQuery($searchQuery: String!) {\n  products(where: {_search: $searchQuery}) {\n    ...ProductListItem\n  }\n}": types.ProductsGetBySearchQueryDocument,
-    "query ProductsGetList($productsPerPage: Int!, $productsOffset: Int!) {\n  products(first: $productsPerPage, skip: $productsOffset) {\n    ...ProductListItem\n  }\n}": types.ProductsGetListDocument,
+    "query ProductsGetList($productsPerPage: Int!, $productsOffset: Int!, $orderBy: ProductOrderByInput) {\n  products(first: $productsPerPage, skip: $productsOffset, orderBy: $orderBy) {\n    ...ProductListItem\n  }\n}": types.ProductsGetListDocument,
     "query ProductsGetListCount {\n  productsConnection {\n    aggregate {\n      count\n    }\n  }\n}": types.ProductsGetListCountDocument,
     "fragment ReviewItem on Review {\n  id\n  name\n  rating\n  stage\n  headline\n  email\n  content\n}": types.ReviewItemFragmentDoc,
     "mutation ReviewsAddReview($headline: String!, $content: String!, $rating: Int!, $name: String!, $email: String!, $productId: ID!) {\n  createReview(\n    data: {headline: $headline, content: $content, rating: $rating, name: $name, email: $email, product: {connect: {id: $productId}}}\n  ) {\n    ...ReviewItem\n  }\n}": types.ReviewsAddReviewDocument,
@@ -109,7 +109,7 @@ export function graphql(source: "query ProductsGetBySearchQuery($searchQuery: St
 /**
  * The graphql function is used to parse GraphQL queries into a document that can be used by GraphQL clients.
  */
-export function graphql(source: "query ProductsGetList($productsPerPage: Int!, $productsOffset: Int!) {\n  products(first: $productsPerPage, skip: $productsOffset) {\n    ...ProductListItem\n  }\n}"): typeof import('./graphql').ProductsGetListDocument;
+export function graphql(source: "query ProductsGetList($productsPerPage: Int!, $productsOffset: Int!, $orderBy: ProductOrderByInput) {\n  products(first: $productsPerPage, skip: $productsOffset, orderBy: $orderBy) {\n    ...ProductListItem\n  }\n}"): typeof import('./graphql').ProductsGetListDocument;
 /**
  * The graphql function is used to parse GraphQL queries into a document that can be used by GraphQL clients.
  */

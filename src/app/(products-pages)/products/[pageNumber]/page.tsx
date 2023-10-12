@@ -1,5 +1,6 @@
 import { notFound } from "next/navigation";
 import { type Metadata } from "next";
+import { SortingSelect } from "./SortingSelect";
 import { Pagination } from "@/ui/organisms/Pagination";
 import { ProductList } from "@/ui/organisms/ProductList";
 import {
@@ -7,6 +8,7 @@ import {
 	getProductsListCount,
 } from "@/api/products";
 import { CategoryHeadline } from "@/ui/atoms/CategoryHeadline";
+import { type ProductOrderByInput } from "@/gql/graphql";
 
 export const generateMetadata = async ({
 	params,
@@ -31,8 +33,10 @@ export async function generateStaticParams() {
 
 export default async function ProductsPage({
 	params,
+	searchParams,
 }: {
 	params: { pageNumber: string };
+	searchParams: { sort: ProductOrderByInput };
 }) {
 	const currentPage = Number(params.pageNumber);
 	const productsCount = await getProductsListCount();
@@ -41,6 +45,7 @@ export default async function ProductsPage({
 	const products = await getProductsList({
 		productsPerPage: PRODUCTS_PER_PAGE,
 		productsOffset: (currentPage - 1) * PRODUCTS_PER_PAGE,
+		orderBy: searchParams.sort,
 	});
 
 	if (!products) {
@@ -49,7 +54,10 @@ export default async function ProductsPage({
 
 	return (
 		<>
-			<CategoryHeadline name={"Products"} page={currentPage} />
+			<div className="flex items-center justify-between">
+				<CategoryHeadline name={"Products"} page={currentPage} />
+				<SortingSelect />
+			</div>
 			<ProductList
 				products={products}
 				wrapperClass="mb-8 mt-4 grid grid-cols-1 gap-x-6 gap-y-10 sm:grid-cols-2 lg:grid-cols-3"

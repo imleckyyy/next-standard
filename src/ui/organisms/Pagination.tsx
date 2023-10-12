@@ -1,8 +1,11 @@
+"use client";
+
 import { type Route } from "next";
 import {
 	ArrowLeftIcon,
 	ArrowRightIcon,
 } from "@heroicons/react/24/solid";
+import { useSearchParams } from "next/navigation";
 import { ActiveLink } from "../atoms/ActiveLink";
 
 export const Pagination = ({
@@ -14,6 +17,11 @@ export const Pagination = ({
 	totalPages: number;
 	baseUrl: string;
 }) => {
+	const searchParams = useSearchParams();
+	const searchParamsString = searchParams.toString()
+		? "?" + searchParams.toString()
+		: "";
+
 	return (
 		<nav
 			className="flex items-center justify-center py-6"
@@ -24,7 +32,11 @@ export const Pagination = ({
 				{currentPage > 1 && (
 					<li>
 						<ActiveLink
-							href={`${baseUrl}/${currentPage - 1}` as Route<string>}
+							href={
+								`${baseUrl}/${
+									currentPage - 1
+								}${searchParamsString}` as Route<string>
+							}
 							className="relative inline-flex items-center rounded-l-md border border-gray-300 bg-white px-4 py-2 text-sm font-medium text-gray-500 hover:bg-gray-50"
 							activeClassName="border-indigo-500 bg-indigo-50 text-indigo-600"
 							exact
@@ -36,7 +48,11 @@ export const Pagination = ({
 				{Array.from({ length: totalPages }, (_, i) => (
 					<li key={i}>
 						<ActiveLink
-							href={`${baseUrl}/${i + 1}` as Route<string>}
+							href={
+								`${baseUrl}/${
+									i + 1
+								}${searchParamsString}` as Route<string>
+							}
 							className="relative inline-flex items-center border border-gray-300 bg-white px-4 py-2 text-sm font-medium text-gray-500 hover:bg-gray-50"
 							activeClassName="border-indigo-500 bg-indigo-50 text-indigo-600"
 							exact
@@ -48,7 +64,11 @@ export const Pagination = ({
 				{currentPage !== totalPages && (
 					<li>
 						<ActiveLink
-							href={`${baseUrl}/${currentPage + 1}` as Route<string>}
+							href={
+								`${baseUrl}/${
+									currentPage + 1
+								}${searchParamsString}` as Route<string>
+							}
 							className="relative inline-flex items-center rounded-r-md border border-gray-300 bg-white px-4 py-2 text-sm font-medium text-gray-500 hover:bg-gray-50"
 							activeClassName="border-indigo-500 bg-indigo-50 text-indigo-600"
 							exact
