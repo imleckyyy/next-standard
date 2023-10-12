@@ -1,4 +1,5 @@
 import { notFound } from "next/navigation";
+import { type Metadata } from "next";
 import { Pagination } from "@/ui/organisms/Pagination";
 import { ProductList } from "@/ui/organisms/ProductList";
 import {
@@ -6,6 +7,16 @@ import {
 	getProductsListCount,
 } from "@/api/products";
 import { CategoryHeadline } from "@/ui/atoms/CategoryHeadline";
+
+export const generateMetadata = async ({
+	params,
+}: {
+	params: { pageNumber: string };
+}): Promise<Metadata> => {
+	return {
+		title: `Products #${params.pageNumber} - Sklep internetowy`,
+	};
+};
 
 const PRODUCTS_PER_PAGE = 6;
 
@@ -42,6 +53,7 @@ export default async function ProductsPage({
 			<ProductList
 				products={products}
 				wrapperClass="mb-8 mt-4 grid grid-cols-1 gap-x-6 gap-y-10 sm:grid-cols-2 lg:grid-cols-3"
+				sectionType="products-list"
 			/>
 			<Pagination
 				currentPage={currentPage}

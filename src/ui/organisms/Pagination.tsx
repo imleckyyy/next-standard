@@ -15,7 +15,11 @@ export const Pagination = ({
 	baseUrl: string;
 }) => {
 	return (
-		<nav className="flex items-center justify-center py-6">
+		<nav
+			className="flex items-center justify-center py-6"
+			role="navigation"
+			aria-label="Pagination Navigation"
+		>
 			<ul className="flex flex-wrap md:-mt-px">
 				{currentPage > 1 && (
 					<li>

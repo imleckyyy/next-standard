@@ -2,4 +2,9 @@ fragment CollectionDetails on Collection {
 	name
 	slug
 	description
+	image {
+		url
+		width
+		height
+	}
 }

@@ -1,7 +1,13 @@
 import { Suspense } from "react";
+import { type Metadata } from "next";
 import { Placeholder } from "@/ui/atoms/Placeholder";
 import { SuggestedProducts } from "@/ui/organisms/SuggestedProducts";
 import { LatestCollections } from "@/ui/organisms/LatestCollections";
+
+export const metadata: Metadata = {
+	title: "Standard - sklep internetowy",
+	description: "Sklep bez produktów i kategorii",
+};
 
 export default function Home() {
 	return (
@@ -56,7 +62,10 @@ export default function Home() {
 			</div>
 
 			<Suspense fallback={<Placeholder />}>
-				<SuggestedProducts headline="Featured products" />
+				<SuggestedProducts
+					headline="Featured products"
+					sectionType="products-list"
+				/>
 			</Suspense>
 		</>
 	);

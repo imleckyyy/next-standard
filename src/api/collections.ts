@@ -1,5 +1,8 @@
 import { executeGraphql } from "./graphqlApi";
-import { CollectionsGetListDocument } from "@/gql/graphql";
+import {
+	CollectionsGetBySlugDocument,
+	CollectionsGetListDocument,
+} from "@/gql/graphql";
 
 export const getCollectionsList = async ({
 	first,
@@ -10,6 +13,21 @@ export const getCollectionsList = async ({
 		query: CollectionsGetListDocument,
 		variables: {
 			first: first,
+		},
+	});
+
+	return graphqlResponse.collections;
+};
+
+export const getCollectionsListBySlug = async ({
+	slug,
+}: {
+	slug: string;
+}) => {
+	const graphqlResponse = await executeGraphql({
+		query: CollectionsGetBySlugDocument,
+		variables: {
+			slug: slug,
 		},
 	});
 

@@ -10753,14 +10753,21 @@ export type CartSetProductQuantityMutationVariables = Exact<{
 
 export type CartSetProductQuantityMutation = { updateOrderItem?: { id: string } | null };
 
-export type CollectionDetailsFragment = { name: string, slug: string, description?: string | null };
+export type CollectionDetailsFragment = { name: string, slug: string, description?: string | null, image: { url: string, width?: number | null, height?: number | null } };
+
+export type CollectionsGetBySlugQueryVariables = Exact<{
+  slug: Scalars['String']['input'];
+}>;
+
+
+export type CollectionsGetBySlugQuery = { collections: Array<{ name: string, slug: string, description?: string | null, image: { url: string, width?: number | null, height?: number | null } }> };
 
 export type CollectionsGetListQueryVariables = Exact<{
   first: Scalars['Int']['input'];
 }>;
 
 
-export type CollectionsGetListQuery = { collections: Array<{ name: string, slug: string, description?: string | null }> };
+export type CollectionsGetListQuery = { collections: Array<{ name: string, slug: string, description?: string | null, image: { url: string, width?: number | null, height?: number | null } }> };
 
 export type OrdersGetByEmailQueryVariables = Exact<{
   email: Scalars['String']['input'];
@@ -10801,7 +10808,7 @@ export type ProductsGetByCollectionSlugQueryVariables = Exact<{
 }>;
 
 
-export type ProductsGetByCollectionSlugQuery = { collections: Array<{ name: string, slug: string, description?: string | null, products: Array<{ id: string, name: string, price: number, categories: Array<{ name: string }>, images: Array<{ url: string }> }> }> };
+export type ProductsGetByCollectionSlugQuery = { collections: Array<{ name: string, slug: string, description?: string | null, products: Array<{ id: string, name: string, price: number, categories: Array<{ name: string }>, images: Array<{ url: string }> }>, image: { url: string, width?: number | null, height?: number | null } }> };
 
 export type ProductsGetBySearchQueryQueryVariables = Exact<{
   searchQuery: Scalars['String']['input'];
@@ -10899,6 +10906,11 @@ export const CollectionDetailsFragmentDoc = new TypedDocumentString(`
   name
   slug
   description
+  image {
+    url
+    width
+    height
+  }
 }
     `, {"fragmentName":"CollectionDetails"}) as unknown as TypedDocumentString<CollectionDetailsFragment, unknown>;
 export const ProductDetailsFragmentDoc = new TypedDocumentString(`
@@ -11012,6 +11024,22 @@ export const CartSetProductQuantityDocument = new TypedDocumentString(`
   }
 }
     `) as unknown as TypedDocumentString<CartSetProductQuantityMutation, CartSetProductQuantityMutationVariables>;
+export const CollectionsGetBySlugDocument = new TypedDocumentString(`
+    query CollectionsGetBySlug($slug: String!) {
+  collections(where: {slug: $slug}) {
+    ...CollectionDetails
+  }
+}
+    fragment CollectionDetails on Collection {
+  name
+  slug
+  description
+  image {
+    url
+    width
+    height
+  }
+}`) as unknown as TypedDocumentString<CollectionsGetBySlugQuery, CollectionsGetBySlugQueryVariables>;
 export const CollectionsGetListDocument = new TypedDocumentString(`
     query CollectionsGetList($first: Int!) {
   collections(first: $first) {
@@ -11022,6 +11050,11 @@ export const CollectionsGetListDocument = new TypedDocumentString(`
   name
   slug
   description
+  image {
+    url
+    width
+    height
+  }
 }`) as unknown as TypedDocumentString<CollectionsGetListQuery, CollectionsGetListQueryVariables>;
 export const OrdersGetByEmailDocument = new TypedDocumentString(`
     query OrdersGetByEmail($email: String!) {
@@ -11105,6 +11138,11 @@ export const ProductsGetByCollectionSlugDocument = new TypedDocumentString(`
   name
   slug
   description
+  image {
+    url
+    width
+    height
+  }
 }
 fragment ProductListItem on Product {
   id

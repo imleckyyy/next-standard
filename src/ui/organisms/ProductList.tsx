@@ -4,13 +4,15 @@ import { ProductListItem } from "@/ui/molecules/ProductListItem";
 export const ProductList = ({
 	products,
 	wrapperClass,
+	sectionType,
 }: {
 	products: ProductListItemFragment[];
 	wrapperClass?: string;
+	sectionType?: string;
 }) => {
 	return (
 		<ul
-			data-testid="products-list"
+			data-testid={sectionType}
 			className={
 				wrapperClass
 					? wrapperClass

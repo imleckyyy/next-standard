@@ -1,3 +1,5 @@
+import { capitalizeString } from "@/utils";
+
 export const CategoryHeadline = ({
 	name,
 	page,
@@ -6,13 +8,15 @@ export const CategoryHeadline = ({
 	page?: number;
 }) => {
 	return (
-		<h1 className="flex flex-col">
-			<span className="text-2xl font-semibold first-letter:uppercase">
-				{name}
-			</span>
+		<div className="flex flex-col">
+			<h1>
+				<span className="text-2xl font-semibold first-letter:uppercase">
+					{capitalizeString(name)}
+				</span>
+			</h1>
 			{page && (
 				<span className="text-xs text-gray-400">Page: {page}</span>
 			)}
-		</h1>
+		</div>
 	);
 };

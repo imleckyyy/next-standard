@@ -42,8 +42,8 @@ export const Navigation = () => {
 						<li key={item.name}>
 							<ActiveLink
 								href={item.href as Route}
-								className="text-sm text-gray-700 hover:text-gray-900"
-								activeClassName="underline"
+								className="border-b-2 border-transparent text-sm text-gray-700 hover:border-gray-300 hover:text-gray-900"
+								activeClassName="border-violet-300"
 								exact={item.exact}
 							>
 								{item.name}
