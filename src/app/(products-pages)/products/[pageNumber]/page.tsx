@@ -45,7 +45,7 @@ export default async function ProductsPage({
 	const products = await getProductsList({
 		productsPerPage: PRODUCTS_PER_PAGE,
 		productsOffset: (currentPage - 1) * PRODUCTS_PER_PAGE,
-		orderBy: searchParams.sort,
+		orderBy: searchParams.sort || "averageRating_DESC",
 	});
 
 	if (!products) {

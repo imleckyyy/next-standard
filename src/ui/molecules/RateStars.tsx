@@ -21,7 +21,7 @@ export const RateStars = ({ rate }: { rate: number }) => {
 				);
 			})}
 			<span className="ml-2 text-xs font-semibold">
-				{rate}/{MAX_RATE}
+				<span data-testid="product-rating">{rate}</span>/{MAX_RATE}
 			</span>
 		</div>
 	);

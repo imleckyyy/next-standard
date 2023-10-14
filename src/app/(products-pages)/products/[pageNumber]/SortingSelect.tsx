@@ -43,13 +43,13 @@ export const SortingSelect = () => {
 				className="arrow-down-bg block w-48 cursor-pointer appearance-none rounded-md border-gray-300 px-2 py-1 text-sm font-light shadow-sm focus:border-blue-300 focus:ring focus:ring-blue-200 focus:ring-opacity-50 lg:mt-1"
 			>
 				<option
-					value="weightedRating_DESC"
+					value="averageRating_DESC"
 					data-testid="sort-by-rating"
 				>
 					Rating (High to Low)
 				</option>
 				<option
-					value="weightedRating_ASC"
+					value="averageRating_ASC"
 					data-testid="sort-by-rating"
 				>
 					Rating (Low to High)

@@ -8,4 +8,5 @@ fragment ProductListItem on Product {
 		url
 	}
 	price
+	averageRating
 }

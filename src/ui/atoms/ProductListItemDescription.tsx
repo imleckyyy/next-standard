@@ -1,3 +1,4 @@
+import { RateStars } from "../molecules/RateStars";
 import { type ProductListItemFragment } from "@/gql/graphql";
 import { formatPrice } from "@/utils";
 
@@ -6,7 +7,7 @@ type ProductListItemDescriptionProps = {
 };
 
 export const ProductListItemDescription = ({
-	product: { name, price, categories },
+	product: { name, price, categories, averageRating },
 }: ProductListItemDescriptionProps) => {
 	return (
 		<div>
@@ -28,6 +29,9 @@ export const ProductListItemDescription = ({
 					</p>
 				</div>
 			)}
+			<div className="mt-2">
+				<RateStars rate={averageRating || 0} />
+			</div>
 		</div>
 	);
 };
