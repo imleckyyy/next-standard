@@ -27,6 +27,7 @@ const documents = {
     "fragment ProductDetails on Product {\n  id\n  name\n  description\n  categories(first: 1) {\n    name\n  }\n  images {\n    url\n    width\n    height\n  }\n  price\n}": types.ProductDetailsFragmentDoc,
     "query ProductGetById($productId: ID!) {\n  product(where: {id: $productId}) {\n    ...ProductDetails\n  }\n}": types.ProductGetByIdDocument,
     "fragment ProductListItem on Product {\n  id\n  name\n  categories(first: 1) {\n    name\n  }\n  images(first: 1) {\n    url\n  }\n  price\n  averageRating\n}": types.ProductListItemFragmentDoc,
+    "mutation ProductSetAverageRating($productId: ID!, $averageRating: Float!) {\n  updateProduct(where: {id: $productId}, data: {averageRating: $averageRating}) {\n    id\n    averageRating\n  }\n}": types.ProductSetAverageRatingDocument,
     "query ProductsGetByCategorySlug($slug: String!, $productsPerPage: Int!, $productsOffset: Int!) {\n  categories(where: {slug: $slug}) {\n    products(first: $productsPerPage, skip: $productsOffset) {\n      ...ProductListItem\n    }\n  }\n}": types.ProductsGetByCategorySlugDocument,
     "query ProductsGetByCategorySlugCount($slug: String!) {\n  productsConnection(where: {categories_every: {slug: $slug}}) {\n    aggregate {\n      count\n    }\n  }\n}": types.ProductsGetByCategorySlugCountDocument,
     "query ProductsGetByCollectionSlug($slug: String!) {\n  collections(where: {slug: $slug}) {\n    ...CollectionDetails\n    products(first: 20) {\n      ...ProductListItem\n    }\n  }\n}": types.ProductsGetByCollectionSlugDocument,
@@ -90,6 +91,10 @@ export function graphql(source: "query ProductGetById($productId: ID!) {\n  prod
  * The graphql function is used to parse GraphQL queries into a document that can be used by GraphQL clients.
  */
 export function graphql(source: "fragment ProductListItem on Product {\n  id\n  name\n  categories(first: 1) {\n    name\n  }\n  images(first: 1) {\n    url\n  }\n  price\n  averageRating\n}"): typeof import('./graphql').ProductListItemFragmentDoc;
+/**
+ * The graphql function is used to parse GraphQL queries into a document that can be used by GraphQL clients.
+ */
+export function graphql(source: "mutation ProductSetAverageRating($productId: ID!, $averageRating: Float!) {\n  updateProduct(where: {id: $productId}, data: {averageRating: $averageRating}) {\n    id\n    averageRating\n  }\n}"): typeof import('./graphql').ProductSetAverageRatingDocument;
 /**
  * The graphql function is used to parse GraphQL queries into a document that can be used by GraphQL clients.
  */

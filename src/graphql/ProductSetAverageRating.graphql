@@ -1,0 +1,12 @@
+mutation ProductSetAverageRating(
+	$productId: ID!
+	$averageRating: Float!
+) {
+	updateProduct(
+		where: { id: $productId }
+		data: { averageRating: $averageRating }
+	) {
+		id
+		averageRating
+	}
+}

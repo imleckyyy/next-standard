@@ -4,6 +4,7 @@ import {
 	ReviewsAddReviewDocument,
 	type ProductListItemFragment,
 	ProductGetByIdDocument,
+	ProductSetAverageRatingDocument,
 } from "@/gql/graphql";
 
 export const getReviewsByProductId = async (
@@ -60,6 +61,35 @@ export async function addReview({
 			name,
 			email,
 			productId,
+		},
+		cache: "no-store",
+	});
+}
+
+export async function updateAverageRating(productId: string) {
+	const { product } = await executeGraphql({
+		query: ProductGetByIdDocument,
+		variables: {
+			productId,
+		},
+		cache: "no-store",
+	});
+
+	if (!product) {
+		throw new Error("Product not found");
+	}
+
+	const reviews = await getReviewsByProductId(productId);
+
+	const averageRating =
+		reviews.reduce((acc, review) => acc + review.rating, 0) /
+		reviews.length;
+
+	await executeGraphql({
+		query: ProductSetAverageRatingDocument,
+		variables: {
+			productId,
+			averageRating,
 		},
 		cache: "no-store",
 	});

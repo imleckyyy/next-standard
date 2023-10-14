@@ -10823,6 +10823,14 @@ export type ProductGetByIdQuery = { product?: { id: string, name: string, descri
 
 export type ProductListItemFragment = { id: string, name: string, price: number, averageRating?: number | null, categories: Array<{ name: string }>, images: Array<{ url: string }> };
 
+export type ProductSetAverageRatingMutationVariables = Exact<{
+  productId: Scalars['ID']['input'];
+  averageRating: Scalars['Float']['input'];
+}>;
+
+
+export type ProductSetAverageRatingMutation = { updateProduct?: { id: string, averageRating?: number | null } | null };
+
 export type ProductsGetByCategorySlugQueryVariables = Exact<{
   slug: Scalars['String']['input'];
   productsPerPage: Scalars['Int']['input'];
@@ -11138,6 +11146,14 @@ export const ProductGetByIdDocument = new TypedDocumentString(`
   }
   price
 }`) as unknown as TypedDocumentString<ProductGetByIdQuery, ProductGetByIdQueryVariables>;
+export const ProductSetAverageRatingDocument = new TypedDocumentString(`
+    mutation ProductSetAverageRating($productId: ID!, $averageRating: Float!) {
+  updateProduct(where: {id: $productId}, data: {averageRating: $averageRating}) {
+    id
+    averageRating
+  }
+}
+    `) as unknown as TypedDocumentString<ProductSetAverageRatingMutation, ProductSetAverageRatingMutationVariables>;
 export const ProductsGetByCategorySlugDocument = new TypedDocumentString(`
     query ProductsGetByCategorySlug($slug: String!, $productsPerPage: Int!, $productsOffset: Int!) {
   categories(where: {slug: $slug}) {
