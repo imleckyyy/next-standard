@@ -24,8 +24,8 @@ export default async function CollectionsPage() {
 					>
 						<img
 							src={collection.image.url}
-							width={collection.image.width}
-							height={collection.image.height}
+							width={collection.image.width || 0}
+							height={collection.image.height || 0}
 							className="mb-3 rounded-md"
 						></img>
 						{collection.name}
