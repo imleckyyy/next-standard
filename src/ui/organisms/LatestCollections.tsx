@@ -16,7 +16,14 @@ export const LatestCollections = async () => {
 						</h1>
 						{collections && (
 							<p className="mt-4 text-xl text-gray-500">
-								Check out the latest collections:
+								Check out the latest{" "}
+								<Link
+									href="/collections"
+									className="underline hover:text-gray-400"
+								>
+									collections
+								</Link>
+								:
 							</p>
 						)}
 					</div>
